@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableOrder_Hust", "TableOrder_Hust\TableOrder_Hust.csproj", "{CC6D8130-4644-4601-A727-BE866BF926F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC6D8130-4644-4601-A727-BE866BF926F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC6D8130-4644-4601-A727-BE866BF926F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC6D8130-4644-4601-A727-BE866BF926F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC6D8130-4644-4601-A727-BE866BF926F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ADF32397-E766-4CBF-A9FD-4FC09A9AA2A7}
+	EndGlobalSection
+EndGlobal
