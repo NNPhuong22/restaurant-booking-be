@@ -213,7 +213,19 @@ csx/
 # Microsoft Azure Emulator
 ecf/
 rcf/
+# File key bí mật của Google (và các file .json khác)
+*.json
+# NHƯNG không lờ đi các file cấu hình
+!appsettings.json
+!appsettings.Development.json
 
+# Thư mục build của .NET
+[Bb]in/
+[Oo]bj/
+
+# File user của Visual Studio
+*.csproj.user
+*.sln.DotSettings.user
 # Windows Store app package directories and files
 AppPackages/
 BundleArtifacts/
