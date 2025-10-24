@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Google.Apis.Calendar.v3;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.EntityFrameworkCore;
 using TableOrder_Hust.Data;
@@ -16,6 +17,9 @@ builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<ITableService, TableService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IGoogleSheetsService, GoogleSheetsService>();
+builder.Services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();
 
 // Authentication
 builder.Services.AddAuthentication(options =>
@@ -28,6 +32,8 @@ builder.Services.AddAuthentication(options =>
 {
     options.ClientId = builder.Configuration["Google:ClientId"];
     options.ClientSecret = builder.Configuration["Google:ClientSecret"];
+    options.Scope.Add(CalendarService.Scope.CalendarEvents);
+    options.SaveTokens = true;
 });
 
 // Controllers

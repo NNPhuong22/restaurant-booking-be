@@ -16,10 +16,12 @@ namespace TableOrder_Hust.Services
     public class BookingService : IBookingService
     {
         private readonly AppDbContext _context;
+        private readonly IEmailService _emailService;
 
-        public BookingService(AppDbContext context)
+        public BookingService(AppDbContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         public async Task<Booking> CreateBooking(Booking booking)
@@ -36,6 +38,11 @@ namespace TableOrder_Hust.Services
             booking.Status = "Confirmed";
             _context.Bookings.Add(booking);
             await _context.SaveChangesAsync();
+            await _emailService.SendEmailAsync(
+    "customer-email@gmail.com",
+    "Xác nhận đặt bàn",
+    "<h1>Cảm ơn bạn đã đặt bàn!</h1>"
+);
             return booking;
         }
 

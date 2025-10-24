@@ -18,10 +18,13 @@ namespace TableOrder_Hust.Services
     public class ReservationService : IReservationService
     {
         private readonly AppDbContext _context;
-
-        public ReservationService(AppDbContext context)
+        private readonly IEmailService _emailService;
+        private readonly IGoogleCalendarService _calendarService;
+        public ReservationService(IGoogleCalendarService calendarService, AppDbContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
+            _calendarService = calendarService;
         }
 
         public async Task<Reservation> CreateReservationAsync(CreateReservationRequest request)
@@ -54,6 +57,24 @@ namespace TableOrder_Hust.Services
 
             _context.Reservations.Add(reservation);
             await _context.SaveChangesAsync();
+            await _emailService.SendEmailAsync(
+    request.Email,
+    "Xác nhận đặt bàn",
+    "<h1>Cảm ơn bạn đã đặt bàn!</h1>"
+);
+            try
+            {
+                await _calendarService.CreateEventAsync(
+                    $"Lịch đặt bàn tại Nhà hàng HUST",
+                    $"Chi tiết đặt bàn: Bàn số {request.TableId}, cho {request.NumberOfGuests} người.",
+                    request.ReservationTime,
+                    request.ReservationTime.AddMinutes(90)
+                );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not create calendar event: {ex.Message}");
+            }
 
             return reservation;
         }
